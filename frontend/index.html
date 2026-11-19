@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShowSpot — Movie &amp; Local Theatre Ticket Booking System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="bms-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="#" class="brand-logo" id="nav-brand">
+          <div class="brand-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="6" width="20" height="12" rx="2"/>
+              <circle cx="6" cy="12" r="2" fill="currentColor"/>
+              <path d="M10 6v12M14 6v12"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">Show<span class="brand-highlight">Spot</span></span>
+            <span class="brand-tagline">Cinema &amp; Regional Theatre</span>
+          </div>
+        </a>
+
+        <div class="header-search-box">
+          <span class="search-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+          <input type="text" id="global-search-input" placeholder="Search for Movies, Plays, Concerts, Dance and Cultural Events…" autocomplete="off" />
+          <button class="search-clear-btn" id="search-clear-btn" style="display:none;">✕</button>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="location-selector" id="location-picker">
+          <span class="location-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </span>
+          <span class="location-current" id="current-city">Mumbai</span>
+          <span class="dropdown-arrow">▾</span>
+          <div class="city-dropdown" id="city-dropdown">
+            <div class="city-dropdown-header">Popular Cities</div>
+            <div class="city-grid">
+              <button class="city-pill active" data-city="Mumbai">Mumbai</button>
+              <button class="city-pill" data-city="Delhi-NCR">Delhi-NCR</button>
+              <button class="city-pill" data-city="Bengaluru">Bengaluru</button>
+              <button class="city-pill" data-city="Pune">Pune</button>
+              <button class="city-pill" data-city="Kolkata">Kolkata</button>
+              <button class="city-pill" data-city="Hyderabad">Hyderabad</button>
+              <button class="city-pill" data-city="Jaipur">Jaipur</button>
+              <button class="city-pill" data-city="Chennai">Chennai</button>
+            </div>
+          </div>
+        </div>
+
+        <nav class="portal-nav-pills">
+          <button class="portal-pill active" data-portal="buyer" id="nav-buyer-btn">
+            Buyer Portal
+          </button>
+          <button class="portal-pill" data-portal="artist" id="nav-artist-btn">
+            Artist Portal
+          </button>
+          <button class="portal-pill" data-portal="officer" id="nav-officer-btn">
+            Nodal Officer
+          </button>
+        </nav>
+
+        <div class="header-quick-actions">
+          <button class="quick-btn" id="quick-bookings-btn" title="View Active Bookings">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+            <span class="label">Bookings</span>
+            <span class="badge" id="bookings-count-badge" style="display:none;">0</span>
+          </button>
+          <button class="quick-btn" id="quick-undo-btn" title="Undo Last Cancellation (LIFO Stack)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="1 4 1 10 7 10"></polyline>
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+            </svg>
+            <span class="label">Undo</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Category Filter Bar (Buyer View) -->
+  <nav class="category-subnav" id="category-subnav">
+    <div class="category-inner">
+      <div class="category-tabs" id="category-tabs">
+        <button class="cat-tab active" data-category="all">All Events</button>
+        <button class="cat-tab" data-category="1">Movies</button>
+        <button class="cat-tab" data-category="2">Drama &amp; Theatre</button>
+        <button class="cat-tab" data-category="3">Music &amp; Concerts</button>
+        <button class="cat-tab" data-category="sports">Sports</button>
+        <button class="cat-tab" data-category="comedy">Comedy</button>
+        <button class="cat-tab" data-category="4">Dance</button>
+        <button class="cat-tab" data-category="5">Arts &amp; Culture</button>
+        <button class="cat-tab" data-category="workshops">Workshops</button>
+      </div>
+
+      <div class="category-subnav-right">
+        <span class="dsa-indicator" title="Powered by C99 Linked Lists, LIFO Stack, FIFO Queue & Binary Search">
+          DSA Engine &bull; C99 In-Memory Core
+        </span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main View Container (Dynamically Swapped) -->
+  <main id="app-root" class="app-main"></main>
+
+  <!-- Footer -->
+  <footer class="bms-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--bms-primary);">
+              <rect x="2" y="6" width="20" height="12" rx="2"/>
+              <circle cx="6" cy="12" r="2" fill="currentColor"/>
+              <path d="M10 6v12M14 6v12"/>
+            </svg>
+            <span>Show<strong style="color:var(--bms-primary);">Spot</strong></span>
+          </div>
+          <p>Movie &amp; Local Theatre Ticket Booking System. Dedicated to commercial cinema and regional indigenous folk arts.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Entertainment</h4>
+            <a href="#" class="footer-cat-link" data-category="1">Movies</a>
+            <a href="#" class="footer-cat-link" data-category="2">Regional Plays</a>
+            <a href="#" class="footer-cat-link" data-category="3">Musical Events</a>
+            <a href="#" class="footer-cat-link" data-category="4">Folk Dances</a>
+          </div>
+          <div class="footer-col">
+            <h4>Portals</h4>
+            <a href="#" class="footer-portal-link" data-portal="buyer">Buyer Portal</a>
+            <a href="#" class="footer-portal-link" data-portal="artist">Artist Portal</a>
+            <a href="#" class="footer-portal-link" data-portal="officer">Nodal Officer</a>
+          </div>
+          <div class="footer-col">
+            <h4>DSA Engine</h4>
+            <span>Dynamic Singly Linked List</span>
+            <span>10×12 Seating Matrix</span>
+            <span>LIFO Cancellation Undo Stack</span>
+            <span>FIFO Waiting List Queue</span>
+            <span>Binary Search on Pointer Array</span>
+            <span>Binary File Persistence (.dat)</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 ShowSpot &bull; Movie &amp; Local Theatre Ticket Booking System &bull; Built with C Backend &amp; Modern UI</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Container -->
+  <div id="modal-container"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

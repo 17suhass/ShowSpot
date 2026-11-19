@@ -1,0 +1,39 @@
+# Executables and compiled binaries
+*.exe
+*.out
+*.app
+
+# Object files and libraries
+*.o
+*.obj
+*.lib
+*.a
+*.dll
+*.so
+*.dylib
+
+# Debug symbols and compiler cache
+*.pdb
+*.ilk
+*.idb
+*.dSYM/
+
+# Temporary and test artifacts
+*.log
+test_*.json
+test_*.jpg
+test_*.png
+
+# IDE and Editor configurations
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosv
+*.sln.docstates
+
+# Operating System files
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+.DS_Store
