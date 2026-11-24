@@ -1331,8 +1331,12 @@ int main(void) {
     }
 
     while (1) {
+        DWORD timeout = 4000;
         clientSock = accept(serverSock, NULL, NULL);
         if (clientSock == INVALID_SOCKET) continue;
+
+        setsockopt(clientSock, SOL_SOCKET, SO_RCVTIMEO, (const char *)&timeout, sizeof(timeout));
+        setsockopt(clientSock, SOL_SOCKET, SO_SNDTIMEO, (const char *)&timeout, sizeof(timeout));
 
         memset(reqBuf, 0, MAX_REQ);
         recvLen = recv(clientSock, reqBuf, MAX_REQ - 1, 0);
